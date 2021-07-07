@@ -1,6 +1,9 @@
 package io.zipcoder;
 
 
+import com.sun.deploy.net.MessageHeader;
+import javafx.beans.binding.Bindings;
+
 /**
  * @author tariq
  */
@@ -11,25 +14,52 @@ public class StringsAndThings {
      * but not the 'y' in "yellow" (not case sensitive). We'll say that a y or z is at the end of a word if there is not an alphabetic
      * letter immediately following it. (Note: Character.isLetter(char) tests if a char is an alphabetic letter.)
      * example : countYZ("fez day"); // Should return 2
-     *           countYZ("day fez"); // Should return 2
-     *           countYZ("day fyyyz"); // Should return 2
+     * countYZ("day fez"); // Should return 2
+     * countYZ("day fyyyz"); // Should return 2
      */
-    public Integer countYZ(String input){
-        return null;
+    public Integer countYZ(String input) {
+        int len = input.length();
+        int count = 0;
+        input = input.toLowerCase();
+
+        for (int i = 0; i < len; i++) {
+            if (input.charAt(i) == 'y' || input.charAt(i) == 'z') {
+                if (i < len - 1 && !Character.isLetter(input.charAt(i + 1)))
+                    count++;
+                else if (i == len - 1)
+                    count++;
+            }
+        }
+
+
+        return count;
     }
+
 
     /**
      * Given two strings, base and remove, return a version of the base string where all instances of the remove string have
      * been removed (not case sensitive). You may assume that the remove string is length 1 or more.
      * Remove only non-overlapping instances, so with "xxx" removing "xx" leaves "x".
-     *
+     * <p>
      * example : removeString("Hello there", "llo") // Should return "He there"
-     *           removeString("Hello there", "e") //  Should return "Hllo thr"
-     *           removeString("Hello there", "x") // Should return "Hello there"
+     * removeString("Hello there", "e") //  Should return "Hllo thr"
+     * removeString("Hello there", "x") // Should return "Hello there"
      */
-    public String removeString(String base, String remove){
-        return null;
+    public String removeString(String base, String remove) {
+
+
+
+        return base.replace(remove.toString(),"");
+
+
     }
+
+
+
+
+
+
+
 
     /**
      * Given a string, return true if the number of appearances of "is" anywhere in the string is equal
@@ -40,8 +70,35 @@ public class StringsAndThings {
      *           containsEqualNumberOfIsAndNot("noisxxnotyynotxisi") // Should return true
      */
     public Boolean containsEqualNumberOfIsAndNot(String input){
-        return null;
+
+        int count1 = 0;
+        int count2 = 0;
+
+        char[] charArray = input.toCharArray();
+
+        char i = 'i';
+        char s = 's';
+        char n = 'n';
+        char o = 'o';
+        char t = 't';
+
+
+        for (int count = 0; count < charArray.length - 1; count++) {
+            if (charArray[count] == i && charArray[count + 1] == s) {
+                count1++;
+            }
+            if (charArray[count] == n && charArray[count + 1] == o && charArray[count + 2] == t) {
+                count2++;
+            }
+        }
+        return count1 == count2;
+
+
+
+
     }
+
+
 
     /**
      * We'll say that a lowercase 'g' in a string is "happy" if there is another 'g' immediately to its left or right.
@@ -50,12 +107,26 @@ public class StringsAndThings {
      *           gHappy("xxgxx") // Should return  false
      *           gHappy("xxggyygxx") // Should return  false
      */
-    public Boolean gIsHappy(String input){
-        return null;
+    public Boolean gIsHappy(String input) {
+
+
+        char z = 'g';
+        char[] kobe = input.toCharArray();
+        boolean happy = false;
+
+        for (int x = 0; x < kobe.length; x++) {
+            if (kobe[x] == z && kobe[x + 1] == z) {
+                happy = true;
+                if (kobe[x] == z && kobe[x - 1] != z) happy = false;
+                {
+                }
+            }
+
+
+        } return happy;
     }
 
-
-    /**
+    /**}
      * We'll say that a "triple" in a string is a char appearing three times in a row.
      * Return the number of triples in the given string. The triples may overlap.
      * example :  countTriple("abcXXXabc") // Should return 1
@@ -63,6 +134,14 @@ public class StringsAndThings {
      *            countTriple("a") // Should return 0
      */
     public Integer countTriple(String input){
-        return null;
-    }
+            char[] start = input.toCharArray();
+            int count = 0;
+            for (int x = 0; x < start.length - 1; x++) {
+                if (start[x + 1] == start[x] && start[x + 2] == start[x]) {
+                    count++;
+                }
+            }
+            return count;
 }
+    }
+
